@@ -9,3 +9,15 @@ var object = {a:1,b:2}
 fc.forEachObject(object,(k,v) => {
   console.log(k+":"+v)
 })
+
+fc.forEach([1,2,3,4,5],(number) => {
+  fc.unless((number % 2),() => {
+    console.log(number, "is even")
+  })
+})
+
+fc.times(100,(number) => {
+  fc.unless((number % 2 ),() => {
+    console.log(number,"is even")
+  })
+})
