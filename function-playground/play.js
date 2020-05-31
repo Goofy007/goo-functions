@@ -21,3 +21,9 @@ fc.times(100,(number) => {
     console.log(number,"is even")
   })
 })
+
+console.log(
+  fc.every([NaN,NaN,NaN],isNaN)
+);
+
+
