@@ -22,8 +22,13 @@ fc.times(100,(number) => {
   })
 })
 
+
 console.log(
   fc.every([NaN,NaN,NaN],isNaN)
 );
+
+fc.tap("fun")((it) => console.log("val is", it))
+
+
 
 
