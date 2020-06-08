@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="index.js"></script>
+  <script>
+    // console.log(_([1, 2, 3, 4, 5, 5, 6, 7, 8, 4, 4, 5, "a", "A"]).chain().unique(function (item) {
+    //   return typeof item === "string" ? item.toLocaleLowerCase() : item;
+    // }).max().value());
+
+    // console.log(
+    //   _([1, 2, 3, 4, 5]).chain().map((num) => {
+    //     return num * num
+    //   })
+    // )
+
+    let apressBooks = [
+      {
+        name: 'beginners',
+        rating: [4.7],
+        bookDetails: [
+          {
+            "id": 111,
+            "title": "C# 6.0",
+            "author": "ANDREW TROELSEN",
+            "rating": [4.7],
+            "reviews": [{ good: 4, excellent: 12 }]
+          },
+          {
+            "id": 222,
+            "title": "Efficient Learning Machines",
+            "author": "Rahul Khanna",
+            "rating": [4.5],
+            "reviews": []
+          }
+        ]
+      },
+      {
+        name: "pro",
+        rating: [4.3],
+        bookDetails: [
+          {
+            "id": 333,
+            "title": "Pro AngularJS",
+            "author": "Adam Freeman",
+            "rating": [4.0],
+            "reviews": []
+          },
+          {
+            "id": 444,
+            "title": 'Pro ASP.NET',
+            "author": "Adam Freeman",
+            "rating": [4.2],
+            "reviews": [{ good: 14, excellent: 12 }]
+          }
+        ]
+      }
+    ];
+
+    console.log(
+
+      _(apressBooks).chain()
+        .filter((book) => book.rating[0] > 4.5)
+        .map((item) => {
+          return {
+            name: item.name
+          }
+          // console.log(item)
+        })
+
+    )
+
+
+
+
+
+
+      // _([1,2,3,4,5]).map((num) => {
+      //   return num*num
+      // })
+
+
+
+  </script>
+</body>
+
+</html>

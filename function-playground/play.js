@@ -22,12 +22,27 @@ fc.times(100,(number) => {
   })
 })
 
-
 console.log(
   fc.every([NaN,NaN,NaN],isNaN)
 );
 
-fc.tap("fun")((it) => console.log("val is", it))
+fc.tap("fun")((it) => console.log("val is", it));
+
+var doPayment = fc.once(() => {
+  console.log("payment is done")
+});
+
+
+doPayment();
+
+doPayment();
+
+
+
+
+
+
+
 
 
 
