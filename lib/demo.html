@@ -63,18 +63,140 @@
       }
     ];
 
-    console.log(
-
-      _(apressBooks).chain()
-        .filter((book) => book.rating[0] > 4.5)
-        .map((item) => {
-          return {
-            name: item.name
+    let apressBooks2 = [
+      {
+        name: 'beginners',
+        rating: [4.7],
+        bookDetails: [
+          {
+            "id": 111,
+            "title": "C# 6.0",
+            "author": "ANDREW TROELSEN",
+            "rating": [4.7]
+          },
+          {
+            "id": 222,
+            "title": "Efficient Learning Machines",
+            "author": "Rahul Khanna",
+            "rating": [4.5]
           }
-          // console.log(item)
-        })
+        ]
+      },
+      {
+        name: "pro",
+        rating: [4.3],
+        bookDetails: [
+          {
+            "id": 333,
+            "title": "Pro AngularJS",
+            "author": "Adam Freeman",
+            "rating": [4.0]
+          },
+          {
+            "id": 444,
+            "title": 'Pro ASP.NET',
+            "author": "Adam Freeman",
+            "rating": [4.2]
+          }
+        ]
+      }
+    ];
 
+    // console.log(
+
+    //   _(apressBooks).chain()
+    //     .filter((book) => book.rating[0] > 4.5)
+    //     .map((item) => {
+    //       return {
+    //         name: item.name
+    //       }
+    //       // console.log(item)
+    //     })
+
+    // )
+
+    console.log(
+      "concatALl",
+      _(apressBooks).chain().map((item) => {
+        return item.bookDetails
+      }).concatAll().value()
     )
+
+    console.log(
+      _(apressBooks).map((item) => {
+        return item.bookDetails;
+      })
+    );
+
+    let bookDetailResult = _(apressBooks).chain().map((item) => {
+      return item.bookDetails
+    }).concatAll().reduce((acc, bookDetail) => {
+      let goodReviews = bookDetail.reviews[0] != undefined ?
+        bookDetail.reviews[0].good : 0;
+
+      let excellentReviews = bookDetail.reviews[0] != undefined ?
+        bookDetail.reviews[0].excellent : 0;
+
+      return {
+        good: acc.good + goodReviews, excellent: acc.excellent + excellentReviews
+      }
+    }, { good: 0, excellent: 0 }).value();
+
+
+    let reviewDetails = [
+      {
+        "id": 111,
+        "reviews": [{ good: 6, excellent: 12 }]
+      },
+      {
+        "id": 222,
+        "reviews": []
+      },
+      {
+        "id": 333,
+        "reviews": []
+      },
+      {
+        "id": 444,
+        "reviews": [{ good: 14, excellent: 12 }]
+      }
+    ]
+
+    let bookDetails = _(apressBooks2).chain().map((item) => {
+      return item.bookDetails
+    }).concatAll().value();
+
+    let zipRe = _.zip(bookDetails, reviewDetails, (book, review) => {
+      if (book.id === review.id) {
+        let clone = Object.assign({}, book)
+        clone.rating = review;
+        return clone;
+      }
+    });
+
+    console.log("zipRe", zipRe)
+
+
+    // let result = _.reduce(bookDetails,(acc,bookDetail)=>{
+    //     let goodReviews = bookDetail.reviews[0] != undefined ?
+    //       bookDetail.reviews[0].good : 0;
+
+    //     let excellentReviews = bookDetail.reviews[0] != undefined ?
+    //     bookDetail.reviews[0].excellent : 0;
+
+    //     return {
+    //       good: acc.good + goodReviews, excellent:acc.excellent + excellentReviews
+    //     }
+    // },{good:0,excellent:0})
+
+    console.log("result", bookDetailResult)
+
+    // let bookDetails = _(apressBooks).chain().map((item) => {
+    //   return item.bookDetails
+    // }).concatAll().reduduce((acc,bookDetails) => {
+
+    // },{good: 0,excellent: 0})
+
 
 
 
